@@ -80,7 +80,14 @@ const loginHandle = async (req, res) => {
   }
 };
 
+// Profile Handle
+const profileHandle = async (req, res) => {
+  console.log(req.user);
+  res.send("PROFILE PAGE");
+};
+
 module.exports = {
   registerHandle,
   loginHandle,
+  profileHandle,
 };

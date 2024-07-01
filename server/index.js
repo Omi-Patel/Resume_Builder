@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const authRoute = require("./src/routes/authRoute");
+const resumeRoute = require("./src/routes/resumeRoute");
 const connectToDB = require("./src/config/connect");
 
 connectToDB();
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", authRoute);
+app.use("/api/resume", resumeRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
