@@ -2,8 +2,15 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/resume", (req, res) => {
-  res.send("RESUME PAGE");
-});
+const {
+  createResume,
+  getResumes,
+  getResumeById,
+  updateResume,
+  deleteResume,
+} = require("../controllers/resumeControlles");
+
+router.post("/create", createResume);
+router.get("/getresumes", getResumes);
 
 module.exports = router;
