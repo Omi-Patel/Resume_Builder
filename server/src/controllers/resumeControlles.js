@@ -7,6 +7,8 @@ const createResume = async (req, res) => {
     phone: "1122334455",
     address: "valoti",
     summary: "Aspiring Software Developer",
+    linkedinUrl: "linkedin.com.in/om-patel",
+    githubUrl: "github.com/omi-patel",
   };
 
   const education = [

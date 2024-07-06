@@ -38,6 +38,8 @@ const resumeSchema = new Schema({
     phone: String,
     address: String,
     summary: String,
+    linkedinUrl: String,
+    githubUrl: String,
   },
   education: [educationSchema],
   experience: [experienceSchema],
