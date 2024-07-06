@@ -8,6 +8,14 @@ import About from "./components/about/About";
 import Profile from "./components/profile/Profile";
 import Footer from "./components/footer/Footer";
 import Contact from "./components/contact/Contact";
+import CreateResume from "./components/resume/CreateResume";
+import PersonalInfo from "./components/resume/PersonalInfo";
+import Education from "./components/resume/Education";
+import Experience from "./components/resume/Experience";
+import Projects from "./components/resume/Projects";
+import Skills from "./components/resume/Skills";
+import Review from "./components/resume/Review";
+import Layout from "./components/resume/Layout";
 
 function App() {
   return (
@@ -18,8 +26,59 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/contact" element={<Contact />} />
 
+          <Route
+            path="/create-resume"
+            element={
+              <Layout>
+                <CreateResume />
+              </Layout>
+            }
+          />
+          <Route
+            path="/create-resume/personal-info"
+            element={
+              <Layout>
+                <PersonalInfo />
+              </Layout>
+            }
+          />
+          <Route
+            path="/create-resume/education"
+            element={
+              <Layout>
+                <Education />
+              </Layout>
+            }
+          />
+          <Route
+            path="/create-resume/experience"
+            element={
+              <Layout>
+                <Experience />
+              </Layout>
+            }
+          />
+          <Route
+            path="/create-resume/projects"
+            element={
+              <Layout>
+                <Projects />
+              </Layout>
+            }
+          />
+          <Route
+            path="/create-resume/skills"
+            element={
+              <Layout>
+                <Skills />
+              </Layout>
+            }
+          />
+
+          <Route path="/review" element={<Review />} />
+
+          <Route path="/contact" element={<Contact />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
