@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Projects = () => {
+  const [title1, setTitle1] = useState("");
+  const [description1, setDescription1] = useState("");
+  const [link1, setLink1] = useState("");
+
+  const project1 = {
+    title: title1,
+    description: description1,
+    link: link1,
+  };
+
+  const [title2, setTitle2] = useState("");
+  const [description2, setDescription2] = useState("");
+  const [link2, setLink2] = useState("");
+
+  const project2 = {
+    title: title2,
+    description: description2,
+    link: link2,
+  };
+
+  const [allProjects, setAllProjects] = useState([]);
+
+  const handleSubmit = (index, e) => {
+    const newProject = [];
+    newProject.push(project1);
+    newProject.push(project2);
+    setAllProjects(newProject);
+  };
+  // console.log(allProjects);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // localStorage.setItem("projects", JSON.stringify(projects));
+  //   console.log("SUBMITTED", allProjects);
+  // };
+
   return (
     <div className=" h-full">
       <h1 className="bg-red-100 text-3xl text-center font-bold font-mono tracking-tighter">
@@ -19,6 +55,8 @@ const Projects = () => {
               name="project"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Project-1"
+              value={title1}
+              onChange={(e) => setTitle1(e.target.value)}
             />
           </div>
 
@@ -32,6 +70,8 @@ const Projects = () => {
               name="urls"
               placeholder="Project URL"
               className="block w-full px-4 py-3  text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={link1}
+              onChange={(e) => setLink1(e.target.value)}
             />
           </div>
         </div>
@@ -47,16 +87,16 @@ const Projects = () => {
               name="description"
               className="block w-full px-4 py-2 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-none"
               placeholder="Description"
+              value={description1}
+              onChange={(e) => setDescription1(e.target.value)}
             />
           </div>
         </div>
 
         <hr className="mt-8" />
 
-        {/* Higher Secondary */}
+        {/* Second Project */}
         <div className=" mt-4 max-w-4xl mx-auto">
-          {/* First Row -> Comp. & Start and End Date */}
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-16 mt-4">
             <div className="mt-[16px]">
               {/* <label htmlFor="name">Project Name</label> */}
@@ -65,7 +105,9 @@ const Projects = () => {
                 id="project"
                 name="project"
                 className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Project-1"
+                placeholder="Project-2"
+                value={title2}
+                onChange={(e) => setTitle2(e.target.value)}
               />
             </div>
 
@@ -79,6 +121,8 @@ const Projects = () => {
                 name="urls"
                 placeholder="Project URL"
                 className="block w-full px-4 py-3  text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                value={link2}
+                onChange={(e) => setLink2(e.target.value)}
               />
             </div>
           </div>
@@ -94,6 +138,8 @@ const Projects = () => {
                 name="description"
                 className="block w-full px-4 py-2 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-none"
                 placeholder="Description"
+                value={description2}
+                onChange={(e) => setDescription2(e.target.value)}
               />
             </div>
           </div>
@@ -120,7 +166,10 @@ const Projects = () => {
               <span>Back</span>
             </div>
           </button>
-          <button className="bg-yellow-300 px-6 py-3 rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="bg-yellow-300 px-6 py-3 rounded-lg"
+          >
             <div className="flex gap-1 items-center justify-center">
               <span>Save & Next</span>
 
