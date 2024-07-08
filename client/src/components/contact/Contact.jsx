@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@nextui-org/react";
 
 const Contact = () => {
   return (
@@ -103,12 +104,24 @@ const Contact = () => {
                         cols={3}
                       />
                     </div>
-                    <button
-                      type="button"
-                      className="w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                      Send Message
-                    </button>
+                    <div className="">
+                      <Button
+                        type="button"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold  text-white hover:bg-blue-800"
+                      >
+                        <span className="">Send Message</span>
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="size-6"
+                          >
+                            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+                          </svg>
+                        </span>
+                      </Button>
+                    </div>
                   </form>
                 </div>
               </div>

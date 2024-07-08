@@ -1,13 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Button } from "@nextui-org/react";
+
 
 const Singup = () => {
   return (
     <div className="min-h-screen max-w-7xl mx-auto flex justify-center items-center">
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-            <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
+          <div className="flex items-center justify-center px-8 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+            <div className="xl:mx-auto w-full xl:w-full xl:max-w-sm 2xl:max-w-md">
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
                 Sign up
               </h2>
@@ -48,12 +50,12 @@ const Singup = () => {
                       {" "}
                       Email address{" "}
                     </label>
+
                     <div className="mt-2">
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="email"
                         placeholder="Email"
-                        id="email"
                       ></input>
                     </div>
                   </div>
@@ -77,12 +79,28 @@ const Singup = () => {
                     </div>
                   </div>
                   <div>
-                    <button
+                    <Button
                       type="button"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold  text-white hover:bg-blue-800"
                     >
-                      Create Account
-                    </button>
+                      <span>Create Account</span>
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                          />
+                        </svg>
+                      </span>
+                    </Button>
                   </div>
                 </div>
               </form>
@@ -136,7 +154,7 @@ const Singup = () => {
               <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
                 <h3 className="text-4xl font-bold text-white">
                   Now you dont have to rely on your designer to create a new
-                  page
+                  resume
                 </h3>
                 <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                   <li className="flex items-center space-x-3">
