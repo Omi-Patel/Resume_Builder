@@ -28,6 +28,8 @@ const Projects = () => {
     newProject.push(project1);
     newProject.push(project2);
     setAllProjects(newProject);
+    localStorage.setItem('projects', JSON.stringify(newProject));
+
   };
   // console.log(allProjects);
 

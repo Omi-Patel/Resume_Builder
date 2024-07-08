@@ -18,6 +18,22 @@ const Skills = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const personalInfo = JSON.parse(localStorage.getItem("personalInfo"));
+    const education = JSON.parse(localStorage.getItem("education"));
+    const experience = JSON.parse(localStorage.getItem("experience"));
+    const projects = JSON.parse(localStorage.getItem("projects"));
+
+    // API Call
+
+    // try {
+    //   await createResume({ personalInfo, education, experience, projects, skills }, token);
+    //   alert('Resume created successfully');
+    //   history.push('/review');
+    // } catch (error) {
+    //   alert('Error creating resume');
+    // }
     console.log("SUBMITTED", skills);
   };
 

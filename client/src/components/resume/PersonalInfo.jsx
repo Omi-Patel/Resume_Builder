@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
 const PersonalInfo = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [github, setGithub] = useState("");
+  const [summary, setSummary] = useState("");
+
+  const handleSubmit = (index, e) => {
+    const personalInfo = {
+      name: name,
+      email: email,
+      phone: mobile,
+      address: address,
+      summary: summary,
+      linkedinUrl: linkedin,
+      githubUrl: github,
+    };
+    // console.log("Submitted", personalInfo);
+    localStorage.setItem("personalInfo", JSON.stringify(personalInfo));
+  };
+
   return (
     <div className=" h-full">
       <h1 className="bg-red-100 text-3xl text-center font-bold font-mono tracking-tighter">
@@ -19,6 +41,8 @@ const PersonalInfo = () => {
               name="name"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
@@ -30,6 +54,8 @@ const PersonalInfo = () => {
               name="email"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -45,6 +71,8 @@ const PersonalInfo = () => {
               name="mobile"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Your Mobile No."
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
             />
           </div>
 
@@ -56,6 +84,8 @@ const PersonalInfo = () => {
               name="address"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Your Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
         </div>
@@ -70,6 +100,8 @@ const PersonalInfo = () => {
               name="linkedin"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="LinkedIn URL"
+              value={linkedin}
+              onChange={(e) => setLinkedin(e.target.value)}
             />
           </div>
 
@@ -81,6 +113,8 @@ const PersonalInfo = () => {
               name="github"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="GitHub URL"
+              value={github}
+              onChange={(e) => setGithub(e.target.value)}
             />
           </div>
         </div>
@@ -96,10 +130,11 @@ const PersonalInfo = () => {
               name="summary"
               className="block w-full px-4 py-2 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-none"
               placeholder="Summary"
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
             />
           </div>
         </div>
-
 
         {/* Buttons */}
 
@@ -123,7 +158,10 @@ const PersonalInfo = () => {
               <span>Back</span>
             </div>
           </button>
-          <button className="bg-yellow-300 px-6 py-3 rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="bg-yellow-300 px-6 py-3 rounded-lg"
+          >
             <div className="flex gap-1 items-center justify-center">
               <span>Save & Next</span>
 

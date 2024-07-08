@@ -32,6 +32,7 @@ const Experience = () => {
     newExperience.push(company1);
     newExperience.push(company2);
     setAllExperience(newExperience);
+    localStorage.setItem("experience", JSON.stringify(newExperience));
   };
   // console.log("Submitted", allExperience);
 

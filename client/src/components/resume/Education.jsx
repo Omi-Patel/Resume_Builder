@@ -1,6 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Education = () => {
+  const [college1, setCollege1] = useState("");
+  const [startDate1, setStartDate1] = useState("");
+  const [endDate1, setEndDate1] = useState("");
+  const [qualification1, setQualification1] = useState("");
+
+  const education1 = {
+    college: college1,
+    startDate: startDate1,
+    endDate: endDate1,
+    qualification: qualification1,
+  };
+
+  const [college2, setCollege2] = useState("");
+  const [startDate2, setStartDate2] = useState("");
+  const [endDate2, setEndDate2] = useState("");
+  const [qualification2, setQualification2] = useState("");
+
+  const education2 = {
+    college: college2,
+    startDate: startDate2,
+    endDate: endDate2,
+    qualification: qualification2,
+  };
+
+  const [allEducations, setAllEducations] = useState([]);
+
+  const handleSubmit = (index, e) => {
+    const newEducation = [];
+    newEducation.push(education1);
+    newEducation.push(education2);
+    setAllEducations(newEducation);
+    localStorage.setItem("education", JSON.stringify(newEducation));
+  };
+  // console.log("Submitted", allEducations);
+
   return (
     <div className=" h-full">
       <h1 className="bg-red-100 text-3xl text-center font-bold font-mono tracking-tighter">
@@ -19,6 +54,8 @@ const Education = () => {
               name="university"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="University / College"
+              value={college1}
+              onChange={(e) => setCollege1(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-2 gap-2">
@@ -31,6 +68,8 @@ const Education = () => {
                 id="start"
                 name="start"
                 className="block w-full px-2 py-3  text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                value={startDate1}
+                onChange={(e) => setStartDate1(e.target.value)}
               />
             </div>
             <div className="">
@@ -42,6 +81,8 @@ const Education = () => {
                 id="end"
                 name="end"
                 className="block w-full px-4 py-3  text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                value={endDate1}
+                onChange={(e) => setEndDate1(e.target.value)}
               />
             </div>
           </div>
@@ -57,6 +98,8 @@ const Education = () => {
               name="qualification"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="Qualification"
+              value={qualification1}
+              onChange={(e) => setQualification1(e.target.value)}
             />
           </div>
         </div>
@@ -75,6 +118,8 @@ const Education = () => {
                 name="school"
                 className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 placeholder="12th School"
+                value={college2}
+                onChange={(e) => setCollege2(e.target.value)}
               />
             </div>
             <div className="grid grid-cols-2 gap-2">
@@ -87,6 +132,8 @@ const Education = () => {
                   id="start"
                   name="start"
                   className="block w-full px-2 py-3  text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  value={startDate2}
+                  onChange={(e) => setStartDate2(e.target.value)}
                 />
               </div>
               <div className="">
@@ -98,6 +145,8 @@ const Education = () => {
                   id="end"
                   name="end"
                   className="block w-full px-4 py-3  text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  value={endDate2}
+                  onChange={(e) => setEndDate2(e.target.value)}
                 />
               </div>
             </div>
@@ -113,6 +162,8 @@ const Education = () => {
                 name="qualification"
                 className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 placeholder="Qualification"
+                value={qualification2}
+                onChange={(e) => setQualification2(e.target.value)}
               />
             </div>
           </div>
@@ -139,7 +190,10 @@ const Education = () => {
               <span>Back</span>
             </div>
           </button>
-          <button className="bg-yellow-300 px-6 py-3 rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="bg-yellow-300 px-6 py-3 rounded-lg"
+          >
             <div className="flex gap-1 items-center justify-center">
               <span>Save & Next</span>
 
