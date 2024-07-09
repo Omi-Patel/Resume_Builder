@@ -8,7 +8,7 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -17,7 +17,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -25,6 +25,32 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [login, setLogin] = useState(false);
+
+  const navigate = useNavigate();
+
+  const userId = localStorage.getItem("userId");
+
+  const onLogin = () => {
+    if (localStorage.getItem("token")) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  };
+
+  // logout handle
+  const logoutHandle = () => {
+    setLogin(false);
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    toast.info("User Loggedout Successfully..!");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    onLogin();
+  }, [localStorage.getItem("token")]);
 
   return (
     <Disclosure as="nav" className="bg-gray-900">

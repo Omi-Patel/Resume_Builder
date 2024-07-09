@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Home from "./components/home/Home";
 import Navbar from "./components/nav/Navbar";
 import Signin from "./components/auth/Signin";
@@ -28,14 +33,23 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/create-resume"
             element={
-              <Layout>
-                <CreateResume />
-              </Layout>
+              <ProtectedRoute>
+                <Layout>
+                  <CreateResume />
+                </Layout>
+              </ProtectedRoute>
             }
           />
           <Route
@@ -82,8 +96,22 @@ function App() {
           <Route path="/review" element={<Review />} />
 
           <Route path="/contact" element={<Contact />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/signin"
+            element={
+              <ProtectedRouteForAuth>
+                <Signin />
+              </ProtectedRouteForAuth>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <ProtectedRouteForAuth>
+                <Signup />
+              </ProtectedRouteForAuth>
+            }
+          />
         </Routes>
         <ToastContainer
           position="bottom-right"
@@ -105,3 +133,21 @@ function App() {
 }
 
 export default App;
+
+export const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    return children;
+  } else {
+    return <Navigate to={"/signin"} />;
+  }
+};
+
+export const ProtectedRouteForAuth = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return children;
+  } else {
+    return <Navigate to={"/"} />;
+  }
+};
