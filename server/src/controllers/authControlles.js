@@ -87,8 +87,18 @@ const loginHandle = async (req, res) => {
 
 // Profile Handle
 const profileHandle = async (req, res) => {
-  console.log(req.user);
-  res.send("PROFILE PAGE");
+  const id = req.params.userId;
+
+  // console.log(id);
+  try {
+    const user = await User.findById({ _id: id }).select("-password");
+
+    // console.log(user);
+    res.json({ msg: "User Verified Successfully", user });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
 };
 
 const verifyUser = async (req, res) => {

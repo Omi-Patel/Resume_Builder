@@ -20,7 +20,6 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -154,7 +153,9 @@ export default function Navbar() {
                                 <div className="flex flex-col gap-2">
                                   <Button className="text-[16px] font-medium tracking-wider  w-32 px-0">
                                     <NavLink
-                                      to={`/profile`}
+                                      to={`/profile/${localStorage.getItem(
+                                        "userId"
+                                      )}`}
                                       className="flex gap-2 justify-center items-center p-2  w-full"
                                     >
                                       <span>

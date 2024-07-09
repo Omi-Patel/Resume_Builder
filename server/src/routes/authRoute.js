@@ -14,7 +14,7 @@ router.post("/register", registerHandle);
 
 router.post("/login", loginHandle);
 
-router.get("/profile", protect, profileHandle);
+router.get("/profile/:userId", protect, profileHandle);
 
 router.post("/verifyuser", verifyUser);
 
