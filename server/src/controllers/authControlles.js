@@ -86,8 +86,26 @@ const profileHandle = async (req, res) => {
   res.send("PROFILE PAGE");
 };
 
+const verifyUser = async (req, res) => {
+  try {
+    const token = req.body.token;
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res
+          .status(401)
+          .json({ isValid: false, message: "Invalid token" });
+      }
+      res.json({ isValid: true, decoded });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   registerHandle,
   loginHandle,
   profileHandle,
+  verifyUser,
 };

@@ -17,6 +17,9 @@ import Skills from "./components/resume/Skills";
 import Review from "./components/resume/Review";
 import Layout from "./components/resume/Layout";
 
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>
@@ -82,6 +85,19 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
         <Footer />
       </Router>
     </>

@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const authRoute = require("./src/routes/authRoute");
 const resumeRoute = require("./src/routes/resumeRoute");
@@ -10,6 +11,7 @@ connectToDB();
 const port = 8080;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");

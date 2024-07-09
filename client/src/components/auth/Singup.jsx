@@ -1,9 +1,61 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
-
+import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const Singup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // navigation
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const blob = await fetch(
+      import.meta.env.VITE_BASE_URL + `/api/user/register`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      }
+    );
+
+    const signupData = await blob.json();
+    console.log(signupData);
+
+    // checking condition
+
+    if (signupData.error) {
+      return toast.error(signupData.error);
+    } else {
+      setLoading(false);
+      toast.success(signupData.success);
+
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      navigate("/");
+
+      const token = signupData?.token;
+      localStorage.setItem("token", signupData?.token);
+
+      const decoded = jwtDecode(token);
+      console.log("DECODED", decoded);
+
+      localStorage.setItem("userId", decoded.user.id);
+    }
+  };
+
   return (
     <div className="min-h-screen max-w-7xl mx-auto flex justify-center items-center">
       <section>
@@ -23,7 +75,7 @@ const Singup = () => {
                   Sign In
                 </NavLink>
               </p>
-              <form action="#" method="POST" className="mt-8">
+              <form onSubmit={handleSubmit} className="mt-8">
                 <div className="space-y-5">
                   <div>
                     <label
@@ -37,8 +89,10 @@ const Singup = () => {
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="text"
-                        placeholder="Full Name"
+                        placeholder="John Doe"
                         id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       ></input>
                     </div>
                   </div>
@@ -55,7 +109,10 @@ const Singup = () => {
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="email"
-                        placeholder="Email"
+                        placeholder="john@gmail.com"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       ></input>
                     </div>
                   </div>
@@ -75,12 +132,14 @@ const Singup = () => {
                         type="password"
                         placeholder="Password"
                         id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       ></input>
                     </div>
                   </div>
                   <div>
                     <Button
-                      type="button"
+                      type="submit"
                       className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold  text-white hover:bg-blue-800"
                     >
                       <span>Create Account</span>
