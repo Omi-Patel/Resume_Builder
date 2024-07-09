@@ -10,6 +10,18 @@ const PersonalInfo = () => {
   const [summary, setSummary] = useState("");
 
   const handleSubmit = (index, e) => {
+    if (
+      !name ||
+      !email ||
+      !mobile ||
+      !address ||
+      !summary ||
+      !linkedin ||
+      !github
+    ) {
+      return alert("OHH");
+    }
+
     const personalInfo = {
       name: name,
       email: email,
