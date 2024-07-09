@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
+import Loader from "../loader/Loader";
 
 const Singup = () => {
   const [name, setName] = useState("");
@@ -14,10 +14,9 @@ const Singup = () => {
   // navigation
   const navigate = useNavigate();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const blob = await fetch(
       import.meta.env.VITE_BASE_URL + `/api/user/register`,
       {
@@ -35,6 +34,7 @@ const Singup = () => {
     // checking condition
 
     if (signupData.error) {
+      setLoading(false);
       return toast.error(signupData.error);
     } else {
       setLoading(false);
@@ -53,6 +53,7 @@ const Singup = () => {
       console.log("DECODED", decoded);
 
       localStorage.setItem("userId", decoded.user.id);
+      setLoading(false);
     }
   };
 
@@ -140,25 +141,29 @@ const Singup = () => {
                   <div>
                     <Button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold  text-white hover:bg-blue-800"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold text-[17px] text-white hover:bg-blue-800"
                     >
                       <span>Create Account</span>
-                      <span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="size-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                          />
-                        </svg>
-                      </span>
+                      {loading ? (
+                        <Loader size={"sm"} />
+                      ) : (
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                            />
+                          </svg>
+                        </span>
+                      )}
                     </Button>
                   </div>
                 </div>

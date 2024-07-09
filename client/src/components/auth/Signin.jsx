@@ -1,8 +1,61 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@nextui-org/react";
+import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
+import Loader from "../loader/Loader";
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // navigation
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const blob = await fetch(
+      import.meta.env.VITE_BASE_URL + `/api/user/login`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+
+    const signinData = await blob.json();
+    console.log(signinData);
+
+    // checking condition
+
+    if (signinData.error) {
+      setLoading(false);
+
+      return toast.error(signinData.error);
+    } else {
+      setLoading(false);
+      toast.success(signinData.success);
+
+      setEmail("");
+      setPassword("");
+
+      navigate("/");
+
+      const token = signinData?.token;
+      localStorage.setItem("token", signinData?.token);
+
+      const decoded = jwtDecode(token);
+      console.log("DECODED", decoded);
+
+      localStorage.setItem("userId", decoded.user.id);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen max-w-7xl mx-auto flex justify-center items-center">
       <section>
@@ -22,7 +75,7 @@ const Signin = () => {
                   Create a free account
                 </NavLink>
               </p>
-              <form action="#" method="POST" className="mt-8">
+              <form onSubmit={handleSubmit} className="mt-8">
                 <div className="space-y-5">
                   <div>
                     <label
@@ -37,6 +90,8 @@ const Signin = () => {
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="email"
                         placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       ></input>
                     </div>
                   </div>
@@ -63,32 +118,38 @@ const Signin = () => {
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="password"
                         placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       ></input>
                     </div>
                   </div>
+
                   <div>
                     <Button
-                      type="button"
-                      className="inline-flex w-full  items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold  text-white hover:bg-blue-800"
+                      type="submit"
+                      className="inline-flex w-full  items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold text-[17px] text-white hover:bg-blue-800"
                     >
                       <span>Get started</span>
-
-                      <span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="size-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                          />
-                        </svg>
-                      </span>
+                      {loading ? (
+                        <Loader size={"sm"} />
+                      ) : (
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                            />
+                          </svg>
+                        </span>
+                      )}
                     </Button>
                   </div>
                 </div>

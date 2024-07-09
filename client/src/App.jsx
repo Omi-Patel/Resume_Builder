@@ -123,7 +123,7 @@ function App() {
           pauseOnFocusLoss={false}
           draggable
           pauseOnHover
-          theme="light"
+          theme="colored"
           transition={Bounce}
         />
         <Footer />

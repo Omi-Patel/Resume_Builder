@@ -51,6 +51,11 @@ const loginHandle = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // validation
+    if (!email || !password) {
+      return res.status(400).json({ error: "All Fields Are Required..!" });
+    }
+
     // Check if user exists
     const user = await User.findOne({ email });
 
