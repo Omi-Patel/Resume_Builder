@@ -34,9 +34,7 @@ const registerHandle = async (req, res) => {
 
     const payload = { user: { id: newUser._id, name: newUser.name } };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
 
     return res
       .status(201)
@@ -73,9 +71,7 @@ const loginHandle = async (req, res) => {
     // Create a JWT token
     const payload = { user: { id: user._id, name: user.name } };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
 
     return res
       .status(200)

@@ -1,4 +1,5 @@
 const Resume = require("../models/resume");
+const User = require("../models/user");
 
 const createResume = async (req, res) => {
   const personalInfo = {
@@ -52,6 +53,11 @@ const createResume = async (req, res) => {
       projects,
       skills,
     });
+
+    const existUser = await User.findById({ _id: req.user._id });
+    existUser.resumes.push(resume._id);
+
+    await existUser.save();
 
     return res
       .status(201)
