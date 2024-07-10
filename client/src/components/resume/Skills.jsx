@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 
 const Skills = () => {
   const [skills, setSkills] = useState([""]);
   // const history = useHistory();
+
+  const navigate = useNavigate();
 
   const handleChange = (index, e) => {
     const { value } = e.target;
@@ -38,13 +42,13 @@ const Skills = () => {
   };
 
   return (
-    <div className="bg-blue-400 h-full">
+    <div className=" h-full">
       <h1 className="bg-red-100 text-3xl text-center font-bold font-mono tracking-tighter">
         Skills.
       </h1>
       <div className=" mt-8 max-w-4xl mx-auto py-6">
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 bg-yellow-300 ">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 ">
             {skills.map((skill, index) => (
               <div key={index}>
                 <input
@@ -60,29 +64,74 @@ const Skills = () => {
               </div>
             ))}
           </div>
-          <div className="mt-4">
-            <button
+          <div className="mt-10 flex justify-between">
+            <Button
+              variant="flat"
+              color="primary"
               type="button"
-              className="bg-green-500 w-32 py-2 rounded-md"
+              className="font-medium text-white flex justify-center items-center gap-1"
               onClick={addField}
             >
-              Add Skill
-            </button>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </span>
+              <span> Add Skill</span>
+            </Button>
 
-            <button type="submit">Submin</button>
+            <Button
+              type="submit"
+              variant="shadow"
+              color="success"
+              className="font-medium text-white flex justify-center items-center gap-1"
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+              </span>
+              <span>Submit & Review</span>
+            </Button>
           </div>
         </form>
 
         {/* Buttons */}
-        <div className="bg-blue-500 mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
-          <button className="bg-yellow-300 px-8 py-3 rounded-lg">
+        <div className="mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
+          <Button
+            radius="full"
+            onClick={() => navigate("/create-resume/projects")}
+            className="px-5"
+          >
             <div className="flex gap-1 items-center justify-center">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="size-5"
+                  className="size-4"
                 >
                   <path
                     fillRule="evenodd"
@@ -93,27 +142,7 @@ const Skills = () => {
               </span>
               <span>Back</span>
             </div>
-          </button>
-          <button className="bg-yellow-300 px-6 py-3 rounded-lg">
-            <div className="flex gap-1 items-center justify-center">
-              <span>Save & Next</span>
-
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="size-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </div>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

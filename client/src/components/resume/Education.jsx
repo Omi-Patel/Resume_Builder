@@ -1,10 +1,14 @@
+import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Education = () => {
   const [college1, setCollege1] = useState("");
   const [startDate1, setStartDate1] = useState("");
   const [endDate1, setEndDate1] = useState("");
   const [qualification1, setQualification1] = useState("");
+
+  const navigate = useNavigate();
 
   const education1 = {
     college: college1,
@@ -170,15 +174,19 @@ const Education = () => {
         </div>
 
         {/* Buttons */}
-        <div className="bg-blue-500 mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
-          <button className="bg-yellow-300 px-8 py-3 rounded-lg">
+        <div className=" mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
+          <Button
+            radius="full"
+            onClick={() => navigate("/create-resume/personal-info")}
+            className="px-5"
+          >
             <div className="flex gap-1 items-center justify-center">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="size-5"
+                  className="size-4"
                 >
                   <path
                     fillRule="evenodd"
@@ -189,10 +197,14 @@ const Education = () => {
               </span>
               <span>Back</span>
             </div>
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="bg-yellow-300 px-6 py-3 rounded-lg"
+          </Button>
+          <Button
+          radius="full"
+          color="primary"
+            onClick={() => {
+              handleSubmit(), navigate("/create-resume/experience");
+            }}
+            className="p-5"
           >
             <div className="flex gap-1 items-center justify-center">
               <span>Save & Next</span>
@@ -202,7 +214,7 @@ const Education = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="size-5"
+                  className="size-4"
                 >
                   <path
                     fillRule="evenodd"
@@ -212,7 +224,7 @@ const Education = () => {
                 </svg>
               </span>
             </div>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

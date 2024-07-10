@@ -1,5 +1,6 @@
+import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const PersonalInfo = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -9,18 +10,20 @@ const PersonalInfo = () => {
   const [github, setGithub] = useState("");
   const [summary, setSummary] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (index, e) => {
-    if (
-      !name ||
-      !email ||
-      !mobile ||
-      !address ||
-      !summary ||
-      !linkedin ||
-      !github
-    ) {
-      return alert("OHH");
-    }
+    // if (
+    //   !name ||
+    //   !email ||
+    //   !mobile ||
+    //   !address ||
+    //   !summary ||
+    //   !linkedin ||
+    //   !github
+    // ) {
+    //   return alert("OHH");
+    // }
 
     const personalInfo = {
       name: name,
@@ -150,15 +153,15 @@ const PersonalInfo = () => {
 
         {/* Buttons */}
 
-        <div className="bg-blue-500 mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
-          <button className="bg-yellow-300 px-8 py-3 rounded-lg">
+        <div className=" mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
+          <Button radius="full" onClick={() => navigate("/")} className="px-5">
             <div className="flex gap-1 items-center justify-center">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="size-5"
+                  className="size-4"
                 >
                   <path
                     fillRule="evenodd"
@@ -169,10 +172,15 @@ const PersonalInfo = () => {
               </span>
               <span>Back</span>
             </div>
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="bg-yellow-300 px-6 py-3 rounded-lg"
+          </Button>
+          <Button
+            color="primary"
+            radius="full"
+            onClick={() => {
+              handleSubmit();
+              navigate("/create-resume/education");
+            }}
+            className="p-5"
           >
             <div className="flex gap-1 items-center justify-center">
               <span>Save & Next</span>
@@ -182,7 +190,7 @@ const PersonalInfo = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="size-5"
+                  className="size-4"
                 >
                   <path
                     fillRule="evenodd"
@@ -192,7 +200,7 @@ const PersonalInfo = () => {
                 </svg>
               </span>
             </div>
-          </button>
+          </Button>
         </div>
       </div>
     </div>
