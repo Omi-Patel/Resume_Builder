@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 // import { useHistory } from "react-router-dom";
 
 const Skills = () => {
@@ -20,7 +22,7 @@ const Skills = () => {
     setSkills([...skills, ""]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const token = localStorage.getItem("token");
@@ -31,14 +33,39 @@ const Skills = () => {
 
     // API Call
 
-    // try {
-    //   await createResume({ personalInfo, education, experience, projects, skills }, token);
-    //   alert('Resume created successfully');
-    //   history.push('/review');
-    // } catch (error) {
-    //   alert('Error creating resume');
-    // }
-    console.log("SUBMITTED", skills);
+    try {
+      const blob = await fetch(
+        import.meta.env.VITE_BASE_URL + `/api/resume/create`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({
+            personalInfo,
+            education,
+            experience,
+            projects,
+            skills,
+          }),
+        }
+      );
+
+      const response = await blob.json();
+      console.log(response);
+
+      if (response.success) {
+        toast.success(response.success);
+        navigate(`/review/${response.resume._id}`);
+      } else {
+        toast.error(response.error);
+      }
+
+      // end of fetch
+    } catch (error) {
+      console.log("ERR", error);
+    }
   };
 
   return (

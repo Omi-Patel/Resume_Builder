@@ -93,7 +93,7 @@ function App() {
             }
           />
 
-          <Route path="/review" element={<Review />} />
+          <Route path="/review/:resumeId" element={<Review />} />
 
           <Route path="/contact" element={<Contact />} />
           <Route

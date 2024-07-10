@@ -2,51 +2,14 @@ const Resume = require("../models/resume");
 const User = require("../models/user");
 
 const createResume = async (req, res) => {
-  const personalInfo = {
-    name: "DHRUV",
-    email: "dpgmail.com",
-    phone: "1122334455",
-    address: "valoti",
-    summary: "Aspiring Software Developer",
-    linkedinUrl: "linkedin.com.in/om-patel",
-    githubUrl: "github.com/omi-patel",
-  };
+  // console.log(req.body);
+  const userId = req.user._id;
 
-  const education = [
-    {
-      degree: "Bachelor's of engineering",
-      institution: "SVIT, Vasad",
-      startDate: "2021-07-10",
-      endDate: "2025-07-31",
-      description: "With an excellence score of 9.22 CGPA",
-    },
-  ];
-
-  const experience = [
-    {
-      title: "Web Developer Intern",
-      company: "Oasis Infobyte",
-      startDate: "2023-03-10",
-      endDate: "2023-08-10",
-      responsibilities: ["HTML", "CSS", "JS", "React"],
-    },
-  ];
-
-  const projects = [
-    {
-      title: "Tiffin Service Provider",
-      description:
-        "Online Tiffin Service made easy to get meal on the home door.",
-      technologies: ["React", "Nodejs", "Expressjs", "MongoDB", "NextUI"],
-      link: "https://om-patel.info",
-    },
-  ];
-
-  const skills = ["HTML", "CSS", "JS", "JAVA", "MERN", "Git & GitHub"];
+  const { personalInfo, education, experience, projects, skills } = req.body;
 
   try {
     const resume = await Resume.create({
-      user: "6682fae4e7b618030043c300",
+      user: userId,
       personalInfo,
       education,
       experience,
@@ -54,7 +17,7 @@ const createResume = async (req, res) => {
       skills,
     });
 
-    const existUser = await User.findById({ _id: req.user._id });
+    const existUser = await User.findById({ _id: userId });
     existUser.resumes.push(resume._id);
 
     await existUser.save();
@@ -79,7 +42,8 @@ const getResumes = async (req, res) => {
 
 const getResumeById = async (req, res) => {
   try {
-    const resume = await Resume.findById(req.params.id);
+    const {resumeId} = req.params;
+    const resume = await Resume.findById({_id : resumeId});
 
     if (!resume) {
       return res.status(404).json({ error: "Resume not found" });

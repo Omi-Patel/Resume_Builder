@@ -4,25 +4,23 @@ const { Schema } = mongoose;
 
 // Sub-schemas
 const educationSchema = new Schema({
-  degree: String,
-  institution: String,
+  qualification: String,
+  college: String,
   startDate: Date,
   endDate: Date,
   description: String,
 });
 
 const experienceSchema = new Schema({
-  title: String,
   company: String,
+  description: String,
   startDate: Date,
   endDate: Date,
-  responsibilities: [String],
 });
 
 const projectSchema = new Schema({
   title: String,
   description: String,
-  technologies: [String],
   link: String,
 });
 

@@ -12,5 +12,6 @@ const {
 
 router.post("/create", createResume);
 router.get("/getresumes", getResumes);
+router.get("/getresume/:resumeId", getResumeById);
 
 module.exports = router;
