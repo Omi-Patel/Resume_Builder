@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 const PersonalInfo = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [designation, setDesignatioin] = useState("");
+  const [website, setWebsite] = useState("");
   const [address, setAddress] = useState("");
   const [mobile, setMobile] = useState("");
   const [linkedin, setLinkedin] = useState("");
@@ -28,6 +30,8 @@ const PersonalInfo = () => {
     const personalInfo = {
       name: name,
       email: email,
+      designation: designation,
+      website: website,
       phone: mobile,
       address: address,
       summary: summary,
@@ -71,6 +75,35 @@ const PersonalInfo = () => {
               placeholder="Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* Added Row - Changes Designation & Website */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-16 mt-4">
+          <div>
+            {/* <label htmlFor="name">Designation</label> */}
+            <input
+              type="text"
+              id="designation"
+              name="designation"
+              className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="Your Designation"
+              value={designation}
+              onChange={(e) => setDesignatioin(e.target.value)}
+            />
+          </div>
+
+          <div>
+            {/* <label htmlFor="name">Website</label> */}
+            <input
+              type="text"
+              id="website"
+              name="website"
+              className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="Your Website / Portfolio"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
             />
           </div>
         </div>

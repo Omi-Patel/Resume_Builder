@@ -35,6 +35,8 @@ const resumeSchema = new Schema({
     email: String,
     phone: String,
     address: String,
+    designation: String,
+    website: String,
     summary: String,
     linkedinUrl: String,
     githubUrl: String,

@@ -51,13 +51,13 @@ const Education = () => {
         {/* First Row -> Uni. & Start and End Date */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-16 mt-4">
           <div className="mt-[18px]">
-            {/* <label htmlFor="name">University Name</label> */}
+            {/* <label htmlFor="name">Qualification Name</label> */}
             <input
               type="text"
               id="uni"
               name="university"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="University / College"
+              placeholder="Qualificaton / eg. Bachelors of Engineering"
               value={college1}
               onChange={(e) => setCollege1(e.target.value)}
             />
@@ -101,7 +101,7 @@ const Education = () => {
               id="qualification"
               name="qualification"
               className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="Qualification"
+              placeholder="eg. From ABC Uni./Inst. with x CGPA"
               value={qualification1}
               onChange={(e) => setQualification1(e.target.value)}
             />
@@ -121,7 +121,7 @@ const Education = () => {
                 id="school"
                 name="school"
                 className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="12th School"
+                placeholder="12th Standard"
                 value={college2}
                 onChange={(e) => setCollege2(e.target.value)}
               />
@@ -165,7 +165,7 @@ const Education = () => {
                 id="qualification"
                 name="qualification"
                 className="block w-full px-4 py-3 mt-2 text-base text-black placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                placeholder="Qualification"
+                placeholder="eg. From ABC School with x %"
                 value={qualification2}
                 onChange={(e) => setQualification2(e.target.value)}
               />
@@ -199,8 +199,8 @@ const Education = () => {
             </div>
           </Button>
           <Button
-          radius="full"
-          color="primary"
+            radius="full"
+            color="primary"
             onClick={() => {
               handleSubmit(), navigate("/create-resume/experience");
             }}

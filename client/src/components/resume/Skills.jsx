@@ -53,7 +53,7 @@ const Skills = () => {
       );
 
       const response = await blob.json();
-      console.log(response);
+      // console.log(response);
 
       if (response.success) {
         toast.success(response.success);
