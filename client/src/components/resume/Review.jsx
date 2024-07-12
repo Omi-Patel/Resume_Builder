@@ -37,7 +37,6 @@ const ResumeReview = () => {
     fetchSingleResume();
   }, [resumeId]);
 
-  // Download PDF fn
   const downloadPDF = async () => {
     const resumeElement = document.getElementById("resume-content");
     const canvas = await html2canvas(resumeElement, {
@@ -46,10 +45,9 @@ const ResumeReview = () => {
     });
 
     const imgData = canvas.toDataURL("image/png");
-    // "p", "mm", "a4"
     const pdf = new jsPDF({
       orientation: "portrait",
-      unit: "mm",
+      unit: "px",
       format: "a4",
     });
 
@@ -84,7 +82,7 @@ const ResumeReview = () => {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto my-8 p-4 sm:p-8 bg-white shadow-lg rounded-lg border border-gray-300">
+      <div className="max-w-3xl mx-auto my-6 bg-white shadow-lg rounded-lg border border-gray-300">
         <div id="resume-content">
           {/* Header Section */}
           <div className="text-center mb-8">
