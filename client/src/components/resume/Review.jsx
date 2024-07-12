@@ -37,33 +37,7 @@ const ResumeReview = () => {
     fetchSingleResume();
   }, [resumeId]);
 
-  // const downloadPDF = async () => {
-  //   const resumeElement = document.getElementById("resume-content");
-  //   const canvas = await html2canvas(resumeElement, {
-  //     scale: 2, // Increase scale for better quality
-  //     useCORS: true, // Allow cross-origin images
-  //   });
-
-  //   const imgData = canvas.toDataURL("image/png");
-  //   // "p", "mm", "a4"
-  //   const pdf = new jsPDF({
-  //     orientation: "portrait",
-  //     unit: "mm",
-  //     format: "a4",
-  //   });
-
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = pdf.internal.pageSize.getHeight();
-  //   const imgProps = pdf.getImageProperties(imgData);
-  //   const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-  //   // If the image height is larger than the PDF height, scale down proportionally
-  //   const adjustedImgHeight = imgHeight > pdfHeight ? pdfHeight : imgHeight;
-
-  //   pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, adjustedImgHeight);
-  //   pdf.save(`${resumeData.personalInfo.name}_Resume.pdf`);
-  // };
-
+  // Download PDF fn
   const downloadPDF = async () => {
     const resumeElement = document.getElementById("resume-content");
     const canvas = await html2canvas(resumeElement, {
@@ -72,6 +46,7 @@ const ResumeReview = () => {
     });
 
     const imgData = canvas.toDataURL("image/png");
+    // "p", "mm", "a4"
     const pdf = new jsPDF({
       orientation: "portrait",
       unit: "mm",

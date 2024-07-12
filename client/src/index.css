@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ResumeReview.css */
+
+.resume-container {
+  width: 210mm;
+  margin: 0 auto;
+}
+
+#resume-content {
+  width: 100%;
+  padding: 10mm;
+  box-sizing: border-box;
+  font-size: 10pt;
+  line-height: 1.2;
+}
+
+h1,
+h2 {
+  page-break-after: avoid;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+
+  #resume-content {
+    page-break-inside: avoid;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    page-break-after: avoid;
+  }
+
+  ul,
+  li {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: #0000ee;
+    text-decoration: none;
+  }
+}
