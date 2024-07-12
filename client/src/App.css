@@ -1,5 +1,95 @@
-* {
-  margin: 0;
-  padding: 0;
+/* ResumeReview.css */
+
+/* .resume-container {
+  width: 210mm;
+  margin: 0 auto;
+}
+
+#resume-content {
+  width: 100%;
+  padding: 10mm;
   box-sizing: border-box;
+  font-size: 6pt;
+  line-height: 4;
+}
+
+h1,
+h2 {
+  page-break-after: avoid;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+
+  #resume-content {
+    page-break-inside: avoid;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    page-break-after: avoid;
+  }
+
+  ul,
+  li {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: #0000ee;
+    text-decoration: none;
+  }
+} */
+
+.resume-container {
+  width: 210mm;
+  margin: 0 auto;
+}
+
+#resume-content {
+  width: 100%;
+  padding: 2mm;
+  box-sizing: border-box;
+  font-size: 8pt !important; /* Adjust font size as per your requirement */
+  line-height: 2 !important; /* Adjust line height for better readability */
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+
+  #resume-content {
+    page-break-inside: avoid;
+    page-break-before: auto;
+    page-break-after: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    page-break-after: avoid;
+  }
+
+  ul,
+  li {
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: #0000ee;
+    text-decoration: none;
+  }
 }
