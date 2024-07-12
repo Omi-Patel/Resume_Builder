@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Loader from "../loader/Loader";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import Loader from "../loader/Loader";
+import "../../../src/App.css"; // Import the CSS file
 
 const ResumeReview = () => {
   const [resumeData, setResumeData] = useState();
@@ -36,29 +37,90 @@ const ResumeReview = () => {
     fetchSingleResume();
   }, [resumeId]);
 
-  // Download PDF fn
+  // const downloadPDF = async () => {
+  //   const resumeElement = document.getElementById("resume-content");
+  //   const canvas = await html2canvas(resumeElement, {
+  //     scale: 2, // Increase the scale to improve the quality
+  //     useCORS: true, // Allow cross-origin images
+  //   });
+
+  //   const imgData = canvas.toDataURL("image/png");
+  //   const pdf = new jsPDF("p", "mm", "a4");
+
+  //   const imgProps = pdf.getImageProperties(imgData);
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  //   let heightLeft = pdfHeight;
+  //   let position = 0;
+
+  //   pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+  //   heightLeft -= pdf.internal.pageSize.getHeight();
+
+  //   while (heightLeft >= 0) {
+  //     position = heightLeft - pdfHeight;
+  //     pdf.addPage();
+  //     pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+  //     heightLeft -= pdf.internal.pageSize.getHeight();
+  //   }
+
+  //   pdf.save(`${resumeData.personalInfo.name}_Resume.pdf`);
+  // };
+
+  // Working good
+  // const downloadPDF = async () => {
+  //   const resumeElement = document.getElementById("resume-content");
+  //   const canvas = await html2canvas(resumeElement, {
+  //     scale: 1, // Adjust scale to fit more content on one page
+  //     useCORS: true, // Allow cross-origin images
+  //   });
+
+  //   const imgData = canvas.toDataURL("image/png");
+  //   const pdf = new jsPDF("p", "mm", "a4");
+
+  //   const pdfWidth = pdf.internal.pageSize.getWidth();
+  //   const pdfHeight = pdf.internal.pageSize.getHeight();
+  //   const imgProps = pdf.getImageProperties(imgData);
+  //   const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  //   // Reduce the height to ensure all content fits in one page
+  //   pdf.addImage(
+  //     imgData,
+  //     "PNG",
+  //     0,
+  //     0,
+  //     pdfWidth,
+  //     imgHeight * (pdfHeight / imgHeight)
+  //   );
+
+  //   pdf.save(`${resumeData.personalInfo.name}_Resume.pdf`);
+  // };
+
   const downloadPDF = async () => {
     const resumeElement = document.getElementById("resume-content");
     const canvas = await html2canvas(resumeElement, {
-      scale: 2, // Adjust as needed to ensure quality
+      scale: 2, // Increase scale for better quality
       useCORS: true, // Allow cross-origin images
-      height: resumeElement.scrollHeight + 50,
     });
 
     const imgData = canvas.toDataURL("image/png");
+    // "p", "mm", "a4"
     const pdf = new jsPDF({
       orientation: "portrait",
-      unit: "px",
-      // format: "a4",
-      format: [canvas.width, canvas.height + 20],
+      unit: "mm",
+      format: "a4",
     });
 
-    // Since the content is already scaled to fit A4, you might not need to adjust the image width and height
-    // pdf.addImage(imgData, "PNG", 20, 10, 400, 610);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-    pdf.addImage(imgData, "PNG", 50, 40, canvas.width-100, canvas.height);
+    // If the image height is larger than the PDF height, scale down proportionally
+    const adjustedImgHeight = imgHeight > pdfHeight ? pdfHeight : imgHeight;
 
-    pdf.save("resume.pdf");
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, adjustedImgHeight);
+    pdf.save(`${resumeData.personalInfo.name}_Resume.pdf`);
   };
 
   if (loading) {
@@ -66,11 +128,7 @@ const ResumeReview = () => {
   }
 
   if (!resumeData) {
-    return (
-      <div className="text-center p-8 text-gray-500">
-        No resume data available.
-      </div>
-    );
+    return <div>No resume data available.</div>;
   }
 
   const {
