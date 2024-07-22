@@ -87,7 +87,9 @@ const profileHandle = async (req, res) => {
 
   // console.log(id);
   try {
-    const user = await User.findById({ _id: id }).select("-password");
+    const user = await User.findById({ _id: id })
+      .select("-password")
+      .populate("resumes");
 
     // console.log(user);
     res.json({ msg: "User Verified Successfully", user });
