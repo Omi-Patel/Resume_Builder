@@ -141,7 +141,7 @@ class Layout extends React.Component {
             </div>
           </div>
         </div>
-        <main className="min-h-screen bg-red-400 w-full sm:w-[85vw] px-4 py-6 sm:px-8 sm:py-10 ">
+        <main className="min-h-screen  w-full sm:w-[85vw] px-4 py-6 sm:px-8 sm:py-10 ">
           {this.props.children}
         </main>
       </div>

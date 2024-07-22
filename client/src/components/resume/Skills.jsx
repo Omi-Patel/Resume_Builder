@@ -96,7 +96,7 @@ const Skills = () => {
               variant="flat"
               color="primary"
               type="button"
-              className="font-medium text-white flex justify-center items-center gap-1"
+              className="font-medium  flex justify-center items-center gap-1"
               onClick={addField}
             >
               <span>

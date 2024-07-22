@@ -33,12 +33,13 @@ const Home = () => {
         </div>
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Data to enrich your online business
+            Build Your Professional Resume Effortlessly
           </h1>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat aliqua.
+            Our easy-to-use resume builder helps you create a standout resume in
+            minutes. Customize your resume to highlight your skills and
+            achievements, and land your dream job with a professional, polished
+            look.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button color="primary" variant="shadow" className="px-0">
