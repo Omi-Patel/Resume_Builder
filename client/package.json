@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@headlessui/react": "^2.1.1",
     "@heroicons/react": "^2.1.4",
     "@nextui-org/react": "^2.4.2",
     "axios": "^1.7.2",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^11.2.12",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.2",
@@ -21,6 +23,7 @@
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.24.1",
     "react-toastify": "^10.0.5"
   },

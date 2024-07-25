@@ -24,6 +24,8 @@ import Layout from "./components/resume/Layout";
 
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Forgot_Password from "./components/otp_verification/ForgotPassword";
+import New_Password from "./components/otp_verification/NewPassword";
 
 function App() {
   return (
@@ -112,6 +114,9 @@ function App() {
               </ProtectedRouteForAuth>
             }
           />
+
+          <Route path="/forgot-password" element={<Forgot_Password />} />
+          <Route path="/reset-password/new-password" element={<New_Password />} />
         </Routes>
         <ToastContainer
           position="bottom-right"

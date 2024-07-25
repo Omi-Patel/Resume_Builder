@@ -104,14 +104,14 @@ const Signin = () => {
                         {" "}
                         Password{" "}
                       </label>
-                      <a
-                        href="#"
+                      <NavLink
+                        to={'/forgot-password'}
                         title=""
                         className="text-sm font-semibold text-black hover:underline"
                       >
                         {" "}
                         Forgot password?{" "}
-                      </a>
+                      </NavLink>
                     </div>
                     <div className="mt-2">
                       <input
