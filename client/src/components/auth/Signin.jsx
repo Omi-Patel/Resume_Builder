@@ -28,7 +28,7 @@ const Signin = () => {
     );
 
     const signinData = await blob.json();
-    console.log(signinData);
+    // console.log(signinData);
 
     // checking condition
 
