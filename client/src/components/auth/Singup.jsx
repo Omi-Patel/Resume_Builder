@@ -4,15 +4,103 @@ import { Button } from "@nextui-org/react";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import Loader from "../loader/Loader";
+import emailjs from "@emailjs/browser";
 
 const Singup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
 
   // navigation
   const navigate = useNavigate();
+
+  // Experimental Code
+  const generateOTP = () => {
+    const digits = "0123456789";
+    let OTP = "";
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+  };
+
+  const sendOTPMail = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const newOtp = generateOTP();
+    setGeneratedOtp(newOtp);
+
+    const templateParams = {
+      to_email: email,
+      message: newOtp,
+    };
+
+    try {
+      await emailjs.send(
+        "resumifyX",
+        "template_vu0ou76",
+        templateParams,
+        "V1mcZHxH3lgu1mEzs" // Add your EmailJS user ID here
+      );
+      toast.success("OTP Sent Successfully!");
+      setOtpSent(true);
+    } catch (error) {
+      toast.error("Failed to send OTP. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOtpVerification = async (e) => {
+    e.preventDefault();
+
+    if (otp !== generatedOtp) {
+      toast.error("Invalid OTP");
+      return;
+    }
+
+    try {
+      // Simulate successful registration
+      const response = await handleSubmit(e);
+
+      // checking condition
+
+      if (response.success) {
+        setLoading(false);
+        toast.success("OTP verified!");
+
+        toast.success(response.success);
+
+        setName("");
+        setEmail("");
+        setPassword("");
+        setOtp("");
+        setOtpSent(false);
+
+        navigate("/");
+
+        const token = response?.token;
+        localStorage.setItem("token", response?.token);
+
+        const decoded = jwtDecode(token);
+        // console.log("DECODED", decoded);
+
+        localStorage.setItem("userId", decoded.user.id);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        return toast.error(response.error);
+      }
+    } catch (error) {
+      toast.error("Registration failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,32 +117,8 @@ const Singup = () => {
     );
 
     const signupData = await blob.json();
-    console.log(signupData);
-
-    // checking condition
-
-    if (signupData.error) {
-      setLoading(false);
-      return toast.error(signupData.error);
-    } else {
-      setLoading(false);
-      toast.success(signupData.success);
-
-      setName("");
-      setEmail("");
-      setPassword("");
-
-      navigate("/");
-
-      const token = signupData?.token;
-      localStorage.setItem("token", signupData?.token);
-
-      const decoded = jwtDecode(token);
-      console.log("DECODED", decoded);
-
-      localStorage.setItem("userId", decoded.user.id);
-      setLoading(false);
-    }
+    // console.log(signupData);
+    return signupData;
   };
 
   return (
@@ -76,7 +140,7 @@ const Singup = () => {
                   Sign In
                 </NavLink>
               </p>
-              <form onSubmit={handleSubmit} className="mt-8">
+              <form onSubmit={sendOTPMail} className="mt-8">
                 <div className="space-y-5">
                   <div>
                     <label
@@ -138,34 +202,90 @@ const Singup = () => {
                       ></input>
                     </div>
                   </div>
-                  <div>
-                    <Button
-                      type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold text-[17px] text-white hover:bg-blue-800"
-                    >
-                      <span>Create Account</span>
-                      {loading ? (
-                        <Loader size={"sm"} />
-                      ) : (
-                        <span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="size-6"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-                            />
-                          </svg>
-                        </span>
-                      )}
-                    </Button>
-                  </div>
+
+                  {otpSent && (
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <label
+                          htmlFor="otp"
+                          className="text-base font-medium text-gray-900"
+                        >
+                          {" "}
+                          OTP{" "}
+                        </label>
+                      </div>
+                      <div className="mt-2">
+                        <input
+                          className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                          type="text"
+                          placeholder="Enter Your OTP"
+                          id="otp"
+                          value={otp}
+                          onChange={(e) => setOtp(e.target.value)}
+                        ></input>
+                      </div>
+                    </div>
+                  )}
+
+                  {otpSent ? (
+                    <div>
+                      <Button
+                        onClick={handleOtpVerification}
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold text-[17px] text-white hover:bg-blue-800"
+                      >
+                        <span>Verify OTP & Register</span>
+                        {loading ? (
+                          <Loader size={"sm"} />
+                        ) : (
+                          <span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="size-6"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                              />
+                            </svg>
+                          </span>
+                        )}
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Button
+                        type="submit"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-700 px-3.5 py-2.5 font-semibold text-[17px] text-white hover:bg-blue-800"
+                      >
+                        <span>Create Account</span>
+                        {loading ? (
+                          <Loader size={"sm"} />
+                        ) : (
+                          <span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="size-6"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                              />
+                            </svg>
+                          </span>
+                        )}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </form>
               {/* <div className="mt-3 space-y-3">

@@ -49,7 +49,7 @@ const Signin = () => {
       localStorage.setItem("token", signinData?.token);
 
       const decoded = jwtDecode(token);
-      console.log("DECODED", decoded);
+      // console.log("DECODED", decoded);
 
       localStorage.setItem("userId", decoded.user.id);
       setLoading(false);
