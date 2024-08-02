@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import Loader from "../loader/Loader";
 import emailjs from "@emailjs/browser";
+import generateOTP from "../../Services/generateOTP";
 
 const Singup = () => {
   const [name, setName] = useState("");
@@ -19,14 +20,6 @@ const Singup = () => {
   const navigate = useNavigate();
 
   // Experimental Code
-  const generateOTP = () => {
-    const digits = "0123456789";
-    let OTP = "";
-    for (let i = 0; i < 6; i++) {
-      OTP += digits[Math.floor(Math.random() * 10)];
-    }
-    return OTP;
-  };
 
   const sendOTPMail = async (e) => {
     e.preventDefault();

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { Helmet } from "react-helmet";
+import generateOTP from "../../Services/generateOTP";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -56,15 +57,6 @@ export default function ForgotPassword() {
       toast.error("Failed to send OTP. Please try again.");
       setOTP("");
     }
-  };
-
-  const generateOTP = () => {
-    const digits = "0123456789";
-    let OTP = "";
-    for (let i = 0; i < 6; i++) {
-      OTP += digits[Math.floor(Math.random() * 10)];
-    }
-    return OTP;
   };
 
   const resendOTP = async (e) => {
