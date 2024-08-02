@@ -12,8 +12,8 @@ const port = 8080;
 
 app.use(
   cors({
-    origin: ["https://resumifyx.vercel.app/"],
-    methods: ["POST", "GET", "DELETE", "PUT"],
+    origin: ["https://resumifyx.vercel.app"],
+    methods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
 );
