@@ -11,7 +11,14 @@ connectToDB();
 const port = 8080;
 
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    orgin: ["https://resumifyx.vercel.app/"],
+    methods: ["POST", "GET", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
