@@ -64,7 +64,7 @@ const Singup = () => {
 
       if (response.success) {
         setLoading(false);
-        toast.success("OTP verified!");
+        // toast.success("OTP verified!");
 
         toast.success(response.success);
 
