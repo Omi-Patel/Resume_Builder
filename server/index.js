@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const authRoute = require("./src/routes/authRoute");
-const resumeRoute = require("./src/routes/resumeRoute");
-const connectToDB = require("./src/config/connect");
-const protect = require("./src/middlewares/authMiddleware");
+const authRoute = require("./routes/authRoute");
+const resumeRoute = require("./routes/resumeRoute");
+const connectToDB = require("./config/connect");
+const protect = require("./middlewares/authMiddleware");
 
 connectToDB();
 const port = 8080;
