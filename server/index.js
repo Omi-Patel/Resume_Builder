@@ -10,8 +10,6 @@ const protect = require("./src/middlewares/authMiddleware");
 connectToDB();
 const port = 8080;
 
-app.use(express.json());
-
 app.use(
   cors({
     orgin: ["https://resumifyx.vercel.app/"],
@@ -19,6 +17,9 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
