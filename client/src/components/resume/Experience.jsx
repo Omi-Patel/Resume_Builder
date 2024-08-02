@@ -42,7 +42,7 @@ const Experience = () => {
 
   return (
     <div className=" h-full">
-      <h1 className="bg-red-100 text-3xl text-center font-bold font-mono tracking-tighter">
+      <h1 className="bg-black/5 text-3xl p-2 rounded-lg  text-center font-bold font-mono tracking-tighter">
         Experience
       </h1>
 
@@ -178,7 +178,8 @@ const Experience = () => {
 
         {/* Buttons */}
         <div className=" mt-14 text-xl font-semibold tracking-wide flex justify-between items-center">
-          <Button radius="full"
+          <Button
+            radius="full"
             onClick={() => navigate("/create-resume/education")}
             className="px-5"
           >
@@ -201,8 +202,8 @@ const Experience = () => {
             </div>
           </Button>
           <Button
-          color="primary"
-          radius="full"
+            color="primary"
+            radius="full"
             onClick={() => {
               handleSubmit(), navigate("/create-resume/projects");
             }}

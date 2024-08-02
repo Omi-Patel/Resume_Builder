@@ -44,7 +44,7 @@ const PersonalInfo = () => {
 
   return (
     <div className=" h-full">
-      <h1 className="bg-red-100 text-3xl text-center font-bold font-mono tracking-tighter">
+      <h1 className="bg-black/5 text-3xl p-2 rounded-lg text-center font-bold font-mono tracking-tighter">
         Personal INFO.
       </h1>
 
